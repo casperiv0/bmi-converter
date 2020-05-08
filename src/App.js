@@ -7,9 +7,11 @@ class App extends Component {
     super()
 
     this.state = {
-      weight: 0,
-      height: 0,
-      bmi: 0
+      weight: 53,
+      height: 1.65,
+      bmi: 0,
+      state: "",
+      color: ""
     }
   }
 
@@ -27,6 +29,7 @@ class App extends Component {
 
   getBmi = () => {
     const { weight, height } = this.state;
+    const bmi = (weight / (height * height)).toFixed(2)
 
     if (height === 0) {
       return this.setState({
@@ -35,15 +38,42 @@ class App extends Component {
     };
 
     this.setState({
-      bmi: (weight / (height * height)).toFixed(2)
+      bmi: bmi
     })
+    
+    if (bmi <= 18.5) {
+      return this.setState({
+        state: "Underweight",
+        color: "orange"
+      });
+    };
+    
+    if (bmi >= 18.5 && bmi <= 25) {
+      return this.setState({
+        state: "Normal",
+        color: "green"
+      });
+    }
 
-    console.log(this.state.bmi);
+
+    if(bmi >= 25 && bmi <= 30) {
+      return this.setState({
+        state: "Overweight",
+        color: "orange"
+      });
+    }
+
+    if (bmi > 31) {
+      return this.setState({
+        state: "Obesity",
+        color: "red"
+      });
+    };
 
   }
 
   render() {
-    const { weight, height, bmi } = this.state
+    const { weight, height, bmi, state, color } = this.state
     return (
       <div className="App" >
         <FormControl fullWidth>
@@ -66,6 +96,7 @@ class App extends Component {
         {/* Result */}
         <div>
           <h1>Your BMI is: {bmi} </h1>
+          <h2>State: <span style={{color: color}} > {state} </span> </h2>
         </div>
       </div>
     );
