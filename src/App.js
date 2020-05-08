@@ -1,26 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { InputLabel, FormControl, Input, Button } from "@material-ui/core"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
+
+  constructor() {
+    super()
+
+    this.state = {
+      weight: "",
+      height: "",
+      bmi: 0
+    }
+  }
+
+  handleHeight = (e) => {
+    this.setState({
+      height: e.target.value
+    });
+  };
+
+  handleWeight = (e) => {
+    this.setState({
+      weight: e.target.value
+    });
+  };
+
+  getBmi = () => {
+    const { weight, height } = this.state;
+
+    this.setState({
+      bmi: (weight / (height*height)).toFixed(2)
+    })
+
+    console.log(this.state.bmi);
+    
+  }
+
+  render() {
+    const { weight, height,bmi } = this.state
+    return (
+      <div className="App" >
+        <FormControl fullWidth>
+          <InputLabel>Enter your Weight in kilograms</InputLabel>
+          <Input type="number" value={weight} onChange={this.handleWeight} />
+        </FormControl>
+        <div className="margin-top">
+          <FormControl fullWidth>
+            <InputLabel>Enter your height in meters</InputLabel>
+            <Input type="number" value={height} onChange={this.handleHeight} />
+          </FormControl>
+        </div>
+
+        <div className="margin-top">
+          <Button onClick={this.getBmi} fullWidth variant="contained" color="primary">
+            Get BMI
+          </Button>
+        </div>
+
+        {/* Result */}
+        <div>
+          <h1>Your BMI is: {bmi} </h1>
+        </div>
+      </div>
+    );
+  };
+};
 
 export default App;
