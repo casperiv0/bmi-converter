@@ -28,16 +28,22 @@ class App extends Component {
   getBmi = () => {
     const { weight, height } = this.state;
 
+    if (height === 0) {
+      return this.setState({
+        bmi: "Wow! I can't do that!"
+      });
+    };
+
     this.setState({
-      bmi: (weight / (height*height)).toFixed(2)
+      bmi: (weight / (height * height)).toFixed(2)
     })
 
     console.log(this.state.bmi);
-    
+
   }
 
   render() {
-    const { weight, height,bmi } = this.state
+    const { weight, height, bmi } = this.state
     return (
       <div className="App" >
         <FormControl fullWidth>
