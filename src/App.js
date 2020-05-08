@@ -7,8 +7,8 @@ class App extends Component {
     super()
 
     this.state = {
-      weight: 53,
-      height: 1.65,
+      weight: 0,
+      height: 0,
       bmi: 0,
       state: "",
       color: ""
