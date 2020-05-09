@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputLabel, FormControl, Input, Button } from "@material-ui/core"
+import { InputLabel, FormControl, Input, Button, Typography } from "@material-ui/core"
 
 class App extends Component {
 
@@ -94,9 +94,9 @@ class App extends Component {
         </div>
 
         {/* Result */}
-        <div>
-          <h1>Your BMI is: {bmi} </h1>
-          <h2>State: <span style={{color: color}} > {state} </span> </h2>
+        <div style={{marginTop: "20px"}}>
+          <Typography color="inherit" variant="h2">Your BMI is: {bmi} </Typography>
+          <Typography color="inherit" variant="h3">State: <span style={{color: color}} > {state} </span> </Typography>
         </div>
       </div>
     );
