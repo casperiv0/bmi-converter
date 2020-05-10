@@ -30,7 +30,7 @@ class App extends Component {
 
   getBmi = () => {
     const { weight, height } = this.state;
-    const bmi = (weight / (height * height)).toFixed(2)
+    const bmi = (weight / ((height * height)  / 10000 )).toFixed(2)
 
     if (height === 0) {
       return this.setState({
@@ -83,7 +83,7 @@ class App extends Component {
         </FormControl>
         <div className="margin-top">
           <FormControl fullWidth>
-            <InputLabel>Enter your height in meters</InputLabel>
+            <InputLabel>Enter your height in centimeters</InputLabel>
             <Input type="number" value={height} onChange={this.handleHeight} />
           </FormControl>
         </div>
