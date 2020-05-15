@@ -28,9 +28,12 @@ class App extends Component {
     });
   };
 
-  getBmi = () => {
+  getBmi = (e) => {
+    e.preventDefault();
     const { weight, height } = this.state;
     const bmi = (weight / ((height * height)  / 10000 )).toFixed(2)
+
+    
 
     if (height === 0) {
       return this.setState({
@@ -77,6 +80,7 @@ class App extends Component {
     const { weight, height, bmi, state, color } = this.state
     return (
       <div className="App" >
+        <form  onSubmit={this.getBmi}>
         <FormControl fullWidth>
           <InputLabel>Enter your Weight in kilograms</InputLabel>
           <Input type="number" value={weight} onChange={this.handleWeight} />
@@ -89,10 +93,11 @@ class App extends Component {
         </div>
 
         <div className="margin-top">
-          <Button onClick={this.getBmi} fullWidth variant="contained" color="primary">
+          <Button type="submit" fullWidth variant="contained" color="primary">
             Get BMI
           </Button>
         </div>
+        </form>
 
         {/* Result */}
         <div style={{marginTop: "20px"}}>
